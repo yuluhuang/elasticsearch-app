@@ -1,0 +1,48 @@
+spring:
+  resources:
+    chain:
+      strategy:
+        fixed:
+          enabled: true
+          paths: /js/lib/
+          version: v1
+        content:
+          enabled: true
+          paths: /**
+  thymeleaf:
+    mode: HTML # thymeleaf
+  devtools:
+    restart:
+      exclude: static/**,public/**,templates/** # 排除规则 修改后不进行自动加载
+  session:
+    store-type: jdbc # session 会话存储类型
+  profiles:
+    active: dev
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+logging:
+  level:
+    root: WARN
+    org:
+      springframework:
+        web: debug
+      hibernate:
+        SQL: debug
+
+security:
+  basic:
+    enabled: false # 关闭HTTP基本验证
+
+server:
+  port: 8080
+
+# 禁止热加载 禁用重启 如果需要彻底禁用重启支 main 中第一行 System.setProperty("spring.devtools.restart.enabled", "false");
+# spring.devtools.restart.enabled =false
+#
+#  endpoints.cors.allowed-origins=http://example.com
+#  endpoints.cors.allowed-methods=GET,POST
+#  server.tomcat.remote_ip_header=x-forwarded-for
+#  server.tomcat.protocol_header=x-forwarded-proto
