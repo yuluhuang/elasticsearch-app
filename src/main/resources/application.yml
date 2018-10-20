@@ -9,13 +9,11 @@ spring:
         content:
           enabled: true
           paths: /**
-  thymeleaf:
-    mode: HTML # thymeleaf
   devtools:
     restart:
       exclude: static/**,public/**,templates/** # 排除规则 修改后不进行自动加载
   session:
-    store-type: jdbc # session 会话存储类型
+    store-type: none # session 会话存储类型
   profiles:
     active: dev
   jpa:
@@ -36,8 +34,14 @@ security:
   basic:
     enabled: false # 关闭HTTP基本验证
 
+qiniu:
+  AccessKey: csAvJChc5SyfhCJriKJ-HQlQVyUMAXqiZ03dP7jE
+  SecretKey: 4EhaqANEgKi51G4Gjlj0Ez9VEwIKXVOdcqnCurrZ
+  Bucket: demo
+  cdn:
+    prefix: http://pgu0o7pyr.bkt.clouddn.com/
 server:
-  port: 8080
+  port: 28080
 
 # 禁止热加载 禁用重启 如果需要彻底禁用重启支 main 中第一行 System.setProperty("spring.devtools.restart.enabled", "false");
 # spring.devtools.restart.enabled =false

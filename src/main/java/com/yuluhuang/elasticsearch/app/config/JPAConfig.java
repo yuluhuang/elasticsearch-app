@@ -9,6 +9,7 @@
  */
 package com.yuluhuang.elasticsearch.app.config;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,10 +29,11 @@ import javax.sql.DataSource;
  * @date 2018-10-17 17:43
  */
 @Configuration
-@EnableJpaRepositories(basePackages = "com.yuluhuang.elasticsearch.app")
+@EnableJpaRepositories(basePackages = "com.yuluhuang.elasticsearch.app.repository")
 @EnableTransactionManagement
 public class JPAConfig {
     @Bean
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
@@ -41,11 +43,11 @@ public class JPAConfig {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setGenerateDdl(false);
 
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSource());
-        entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
-        entityManagerFactoryBean.setPackagesToScan("com.yuluhuang.elasticsearch.app.entity");
-        return entityManagerFactoryBean;
+        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactory.setDataSource(dataSource());
+        entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
+        entityManagerFactory.setPackagesToScan("com.yuluhuang.elasticsearch.app.entity");
+        return entityManagerFactory;
     }
 
     @Bean

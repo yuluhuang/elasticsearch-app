@@ -84,11 +84,16 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements Application
         return templateEngine;
     }
 
+    /**
+     * 视图解析器
+     *
+     * @return
+     */
     @Bean
     public ThymeleafViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.set
-
+        viewResolver.setTemplateEngine(templateEngine());
+        return viewResolver;
 
     }
 }

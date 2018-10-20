@@ -11,7 +11,6 @@ package com.yuluhuang.elasticsearch.app.security;
 
 import com.yuluhuang.elasticsearch.app.entity.User;
 import com.yuluhuang.elasticsearch.app.service.user.UserService;
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -20,8 +19,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -48,13 +45,13 @@ public class AuthProvider implements AuthenticationProvider {
 
         String encoded = passwordEncoder.encode(inputPassword);
         if (user.getPassword().equals(encoded)) {
-            return new UsernamePasswordAuthenticationToken();
+            return new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
         }
         throw new BadCredentialsException("authError");
     }
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return false;
+        return true;
     }
 }

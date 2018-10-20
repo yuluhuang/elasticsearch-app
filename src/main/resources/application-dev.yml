@@ -1,0 +1,29 @@
+# jpa config
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:13306/xunwu?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&&autoReconnect=true&useSSL=false
+    username: root
+    password: root
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      connection-test-query: SELECT 1
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      pool-name: DatebookHikariCP
+    type: com.zaxxer.hikari.HikariDataSource
+  thymeleaf: # thymeleaf
+    mode: HTML # thymeleaf
+    cache: false
+  http:
+    multipart: # multipart config
+      enabled: true
+      location: /Volumes/storage/workspace/java/share/
+      file-size-threshold: 5MB
+      max-request-size: 20MB
+
+
+
+
+

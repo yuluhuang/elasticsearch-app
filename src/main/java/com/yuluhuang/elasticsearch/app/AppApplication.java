@@ -12,8 +12,4 @@ public class AppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AppApplication.class, args);
 	}
-	@GetMapping("/")
-	public String get() {
-		return "welcome go";
-	}
 }
